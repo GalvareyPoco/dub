@@ -27,6 +27,7 @@ COPY packages ./packages
 RUN pnpm install --frozen-lockfile
 
 
+
 # -----------------------
 # Build Dub
 # -----------------------
@@ -35,9 +36,9 @@ FROM deps AS builder
 WORKDIR /app
 
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_OPTIONS="--max-old-space-size=6144"
 
 RUN pnpm --filter web build
-
 
 # -----------------------
 # Production
